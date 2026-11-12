@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  # ========================================
+  # PHP 8.2 + Laravel Server
+  # ========================================
+  teleman-app:
+    image: php:8.2-fpm
+    container_name: teleman-php
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+      - /var/www/html/vendor
+    command: >
+      bash -c "
+        composer install --no-interaction &&
+        php -S 0.0.0.0:8000 -t public
+      "
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+    depends_on:
+      - teleman-db
+      - teleman-redis
+
+  # ========================================
+  # SQLite Database (usado como archivo)
+  # ========================================
+  teleman-db:
+    image: nouchka/sqlite3
+    container_name: teleman-db
+    volumes:
+      - ./database:/data
+    command: ["sleep", "infinity"]
+
+  # ========================================
+  # Redis Cache (opcional)
+  # ========================================
+  teleman-redis:
+    image: redis:7-alpine
+    container_name: teleman-redis
+    command: redis-server --save 60 1 --loglevel warning
+    ports:
+      - "6379:6379"
+
+  # ========================================
+  # Vite Frontend (Hot Reload)
+  # ========================================
+  teleman-vite:
+    image: node:20-alpine
+    container_name: teleman-vite
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+      - /var/www/html/node_modules
+    command: >
+      bash -c "
+        npm install &&
+        npm run dev
+      "
+    ports:
+      - "5173:5173"
+    environment:
+      - HOST=0.0.0.0
+
+  # ========================================
+  # Mailhog (emails para desarrollo)
+  # ========================================
+  mailhog:
+    image: mailhog/mailhog
+    container_name: teleman-mailhog
+    ports:
+      - "8025:8025"  # Interface web
+      - "1025:1025"  # SMTP
+
+# Red
+networks:
+  default:
+    name: teleman-network

@@ -1,0 +1,2253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teleman AI - Documentation</title>
+    <meta name="description" content="Complete documentation for Teleman AI - Automated Voice Calling Platform">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📞%3C/text%3E%3C/svg%3E">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --primary-light: #60a5fa;
+            --secondary: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #06b6d4;
+            
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --bg-code: #1e293b;
+            
+            --border-color: #e2e8f0;
+            --border-light: #f1f5f9;
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            
+            --radius-sm: 0.375rem;
+            --radius: 0.5rem;
+            --radius-md: 0.75rem;
+            --radius-lg: 1rem;
+            
+            --sidebar-width: 280px;
+            --header-height: 64px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+            overflow-x: hidden;
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+        
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .header-content {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo {
+            font-size: 2rem;
+        }
+        
+        .brand {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .brand-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+        
+        .brand-tagline {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .search-box {
+            position: relative;
+        }
+        
+        .search-input {
+            width: 300px;
+            padding: 0.625rem 1rem 0.625rem 2.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            background: var(--bg-secondary);
+            transition: all 0.2s;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: var(--bg-primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+        
+        .btn {
+            padding: 0.625rem 1.25rem;
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-secondary);
+        }
+        
+        .btn-ghost:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            width: var(--sidebar-width);
+            height: calc(100vh - var(--header-height));
+            background: var(--bg-primary);
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            z-index: 50;
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar-content {
+            padding: 1.5rem 0;
+        }
+        
+        .nav-section {
+            margin-bottom: 2rem;
+        }
+        
+        .nav-title {
+            padding: 0.5rem 1.5rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+        
+        .nav-list {
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-bottom: 0.25rem;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.625rem 1.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+            background: var(--bg-secondary);
+        }
+        
+        .nav-link.active {
+            color: var(--primary);
+            background: rgba(59, 130, 246, 0.1);
+            font-weight: 600;
+        }
+        
+        .nav-link.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--primary);
+        }
+        
+        .nav-icon {
+            font-size: 1.125rem;
+            width: 1.25rem;
+            text-align: center;
+        }
+        
+        .badge {
+            padding: 0.125rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.625rem;
+            font-weight: 700;
+            margin-left: auto;
+        }
+        
+        .badge-primary {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+        }
+        
+        .badge-success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+        
+        .badge-warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            margin-top: var(--header-height);
+            padding: 2rem;
+            min-height: calc(100vh - var(--header-height));
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            color: white;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero-description {
+            font-size: 1.125rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+        
+        /* Content Sections */
+        .content-section {
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--bg-tertiary);
+        }
+        
+        .section-icon {
+            font-size: 1.75rem;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border-radius: var(--radius);
+        }
+        
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .section-description {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+        
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .card-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        .card-description {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        
+        .card-footer {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-light);
+            font-size: 0.875rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        /* Alert Boxes */
+        .alert {
+            padding: 1rem 1.25rem;
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        
+        .alert-icon {
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+        
+        .alert-content {
+            flex: 1;
+        }
+        
+        .alert-title {
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        
+        .alert-info {
+            background: rgba(6, 182, 212, 0.1);
+            border-left: 4px solid var(--info);
+            color: #0e7490;
+        }
+        
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--success);
+            color: #065f46;
+        }
+        
+        .alert-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid var(--warning);
+            color: #92400e;
+        }
+        
+        .alert-danger {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid var(--danger);
+            color: #991b1b;
+        }
+        
+        /* Code Blocks */
+        .code-block {
+            background: var(--bg-code);
+            color: #e2e8f0;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            position: relative;
+        }
+        
+        .code-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.1);
+        }
+        
+        .code-language {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        
+        .copy-btn {
+            background: rgba(226, 232, 240, 0.1);
+            border: none;
+            color: #94a3b8;
+            padding: 0.375rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .copy-btn:hover {
+            background: rgba(226, 232, 240, 0.2);
+            color: #e2e8f0;
+        }
+        
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-tertiary);
+            padding: 0.125rem 0.375rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.875em;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        
+        /* Tables */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+        
+        thead {
+            background: var(--bg-secondary);
+        }
+        
+        th {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-weight: 700;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        tr:hover {
+            background: var(--bg-secondary);
+        }
+        
+        /* Lists */
+        .content-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+        
+        .content-list li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        .content-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: 700;
+        }
+        
+        /* Steps */
+        .steps {
+            counter-reset: step;
+            margin: 2rem 0;
+        }
+        
+        .step {
+            counter-increment: step;
+            margin-bottom: 2rem;
+            padding-left: 3.5rem;
+            position: relative;
+        }
+        
+        .step::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            width: 2.5rem;
+            height: 2.5rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+        
+        .step-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        .step-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        /* FAQ */
+        .faq-item {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 1.25rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 600;
+            color: var(--text-primary);
+            transition: all 0.2s;
+        }
+        
+        .faq-question:hover {
+            background: var(--bg-secondary);
+        }
+        
+        .faq-icon {
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+        
+        .faq-answer-content {
+            padding: 0 1.25rem 1.25rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: 4rem;
+            padding: 2rem;
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-link:hover {
+            color: var(--primary);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 1rem;
+            }
+            
+            .search-box {
+                display: none;
+            }
+            
+            .hero {
+                padding: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .main-content {
+                padding: 1rem;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            .header,
+            .sidebar,
+            .mobile-menu-btn,
+            .search-box,
+            .btn {
+                display: none !important;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                margin-top: 0;
+                padding: 0;
+            }
+            
+            .content-section {
+                box-shadow: none;
+                break-inside: avoid;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .mb-1 { margin-bottom: 0.5rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .mb-3 { margin-bottom: 1.5rem; }
+        .mb-4 { margin-bottom: 2rem; }
+        .mt-2 { margin-top: 1rem; }
+        .mt-4 { margin-top: 2rem; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <button class="mobile-menu-btn" onclick="toggleSidebar()">
+                <i class="bi bi-list"></i>
+            </button>
+            
+            <div class="logo-section">
+                <div class="logo">📞</div>
+                <div class="brand">
+                    <div class="brand-name">Teleman AI</div>
+                    <div class="brand-tagline">Complete Documentation</div>
+                </div>
+            </div>
+            
+            <div class="header-actions">
+                <div class="search-box">
+                    <i class="bi bi-search search-icon"></i>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search documentation...">
+                </div>
+                <a href="https://github.com/TheCodeStudioxyz/teleman-new-vue" class="btn btn-ghost" target="_blank">
+                    <i class="bi bi-github"></i>
+                    GitHub
+                </a>
+                <a href="#quick-start" class="btn btn-primary">
+                    <i class="bi bi-rocket-takeoff"></i>
+                    Get Started
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-content">
+            <!-- Getting Started -->
+            <div class="nav-section">
+                <div class="nav-title">Getting Started</div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link active" onclick="showSection('home')">
+                            <i class="bi bi-house-door nav-icon"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#installation" class="nav-link" onclick="showSection('installation')">
+                            <i class="bi bi-download nav-icon"></i>
+                            <span>Installation</span>
+                            <span class="badge badge-primary">Start Here</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#quick-start" class="nav-link" onclick="showSection('quick-start')">
+                            <i class="bi bi-rocket-takeoff nav-icon"></i>
+                            <span>Quick Start</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Core Features -->
+            <div class="nav-section">
+                <div class="nav-title">Core Features</div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#campaigns" class="nav-link" onclick="showSection('campaigns')">
+                            <i class="bi bi-megaphone nav-icon"></i>
+                            <span>Campaigns</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contacts" class="nav-link" onclick="showSection('contacts')">
+                            <i class="bi bi-people nav-icon"></i>
+                            <span>Contacts</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#softphone" class="nav-link" onclick="showSection('softphone')">
+                            <i class="bi bi-telephone nav-icon"></i>
+                            <span>Softphone</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#manual-calling" class="nav-link" onclick="showSection('manual-calling')">
+                            <i class="bi bi-telephone-outbound nav-icon"></i>
+                            <span>Manual Calling</span>
+                            <span class="badge badge-success">New</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#credits" class="nav-link" onclick="showSection('credits')">
+                            <i class="bi bi-credit-card nav-icon"></i>
+                            <span>Credits & Pricing</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#credit-topup" class="nav-link" onclick="showSection('credit-topup')">
+                            <i class="bi bi-wallet2 nav-icon"></i>
+                            <span>Credit Top-Up</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#phone-numbers" class="nav-link" onclick="showSection('phone-numbers')">
+                            <i class="bi bi-phone nav-icon"></i>
+                            <span>Phone Numbers</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#crm-integrations" class="nav-link" onclick="showSection('crm-integrations')">
+                            <i class="bi bi-plug nav-icon"></i>
+                            <span>CRM Integrations</span>
+                            <span class="badge badge-success">New</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- User Guides -->
+            <div class="nav-section">
+                <div class="nav-title">User Guides</div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#roles" class="nav-link" onclick="showSection('roles')">
+                            <i class="bi bi-shield-check nav-icon"></i>
+                            <span>Roles & Permissions</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Administrator -->
+            <div class="nav-section">
+                <div class="nav-title">Administrator</div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#twilio" class="nav-link" onclick="showSection('twilio')">
+                            <i class="bi bi-gear nav-icon"></i>
+                            <span>Twilio Integration</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#cron-jobs" class="nav-link" onclick="showSection('cron-jobs')">
+                            <i class="bi bi-clock nav-icon"></i>
+                            <span>Cron Jobs</span>
+                            <span class="badge badge-warning">Required</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Help -->
+            <div class="nav-section">
+                <div class="nav-title">Help & Support</div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#faq" class="nav-link" onclick="showSection('faq')">
+                            <i class="bi bi-question-circle nav-icon"></i>
+                            <span>FAQ</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Home Section -->
+            <div id="home-section" class="content-page">
+                <div class="hero fade-in">
+                    <h1 class="hero-title">Welcome to Teleman AI Documentation</h1>
+                    <p class="hero-description">
+                        Complete guide to building and managing automated voice calling campaigns with AI-powered message generation, 
+                        real-time analytics, and professional softphone integration.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-value">15</span>
+                            <span class="stat-label">Documentation Guides</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">35K+</span>
+                            <span class="stat-label">Words Written</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">10,000+</span>
+                            <span class="stat-label">Lines of Documentation</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">100%</span>
+                            <span class="stat-label">Production Ready</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div class="content-section fade-in">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="bi bi-grid-3x3-gap"></i>
+                        </div>
+                        <div>
+                            <h2 class="section-title">Quick Access</h2>
+                            <p class="section-description">Jump to the section you need</p>
+                        </div>
+                    </div>
+                    
+                    <div class="cards-grid">
+                        <a href="#installation" onclick="showSection('installation')" class="card">
+                            <div class="card-icon">🚀</div>
+                            <h3 class="card-title">Installation Guide</h3>
+                            <p class="card-description">Complete setup instructions for all environments with system requirements and configuration steps.</p>
+                            <div class="card-footer">
+                                <span>Start here</span>
+                                <i class="bi bi-arrow-right"></i>
+                            </div>
+                        </a>
+                        
+                        <a href="#quick-start" onclick="showSection('quick-start')" class="card">
+                            <div class="card-icon">⚡</div>
+                            <h3 class="card-title">Quick Start</h3>
+                            <p class="card-description">20-minute tutorial to get your first campaign running and making calls.</p>
+                            <div class="card-footer">
+                                <span>20 min read</span>
+                                <i class="bi bi-arrow-right"></i>
+                            </div>
+                        </a>
+                        
+                        <a href="#campaigns" onclick="showSection('campaigns')" class="card">
+                            <div class="card-icon">📢</div>
+                            <h3 class="card-title">Campaign Management</h3>
+                            <p class="card-description">Create and manage automated calling campaigns with TTS, audio files, and DTMF support.</p>
+                            <div class="card-footer">
+                                <span>Core feature</span>
+                                <i class="bi bi-arrow-right"></i>
+                            </div>
+                        </a>
+                        
+                        <a href="#softphone" onclick="showSection('softphone')" class="card">
+                            <div class="card-icon">📞</div>
+                            <h3 class="card-title">Softphone</h3>
+                            <p class="card-description">Make calls directly from your browser with full call controls and recording capabilities.</p>
+                            <div class="card-footer">
+                                <span>Popular</span>
+                                <i class="bi bi-arrow-right"></i>
+                            </div>
+                        </a>
+
+                        <a href="#manual-calling" onclick="showSection('manual-calling')" class="card">
+                            <div class="card-icon">🎯</div>
+                            <h3 class="card-title">Manual Calling</h3>
+                            <p class="card-description">Click-to-call, post-call notes, disposition codes, and sequential calling sessions for human callers.</p>
+                            <div class="card-footer">
+                                <span class="badge badge-success">New</span>
+                                <i class="bi bi-arrow-right"></i>
+                            </div>
+                        </a>
+
+                        <a href="#credits" onclick="showSection('credits')" class="card">
+                            <div class="card-icon">💰</div>
+                            <h3 class="card-title">Credits & Pricing</h3>
+                            <p class="card-description">Understand the credit system, pricing rules, and how to manage your account balance.</p>
+                            <div class="card-footer">
+                                <span>Essential</span>
+                                <i class="bi bi-arrow-right"></i>
+                            </div>
+                        </a>
+                        
+                        <a href="#crm-integrations" onclick="showSection('crm-integrations')" class="card">
+                            <div class="card-icon">🔌</div>
+                            <h3 class="card-title">CRM Integrations</h3>
+                            <p class="card-description">Connect your CRM and marketing tools with real-time webhooks for seamless data sync.</p>
+                            <div class="card-footer">
+                                <span class="badge badge-success">New</span>
+                                <i class="bi bi-arrow-right"></i>
+                            </div>
+                        </a>
+                        
+                        <a href="#cron-jobs" onclick="showSection('cron-jobs')" class="card">
+                            <div class="card-icon">⏰</div>
+                            <h3 class="card-title">Cron Jobs Setup</h3>
+                            <p class="card-description">Configure scheduled tasks for automated campaign processing and system maintenance.</p>
+                            <div class="card-footer">
+                                <span>Required</span>
+                                <i class="bi bi-arrow-right"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Features Overview -->
+                <div class="content-section fade-in">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="bi bi-stars"></i>
+                        </div>
+                        <div>
+                            <h2 class="section-title">Platform Features</h2>
+                            <p class="section-description">Everything you need for professional voice campaigns</p>
+                        </div>
+                    </div>
+                    
+                    <div class="cards-grid">
+                        <div class="card">
+                            <h4 class="card-title">🎤 Text-to-Speech</h4>
+                            <p class="card-description">Multiple voice options in various languages with natural-sounding AI voices.</p>
+                        </div>
+                        
+                        <div class="card">
+                            <h4 class="card-title">🔊 Audio Files</h4>
+                            <p class="card-description">Upload pre-recorded messages in MP3 or WAV format for professional campaigns.</p>
+                        </div>
+                        
+                        <div class="card">
+                            <h4 class="card-title">📊 Real-time Analytics</h4>
+                            <p class="card-description">Track campaign performance with detailed metrics and call analytics.</p>
+                        </div>
+                        
+                        <div class="card">
+                            <h4 class="card-title">🎯 DTMF Support</h4>
+                            <p class="card-description">Interactive voice response with keypad input for customer interactions.</p>
+                        </div>
+                        
+                        <div class="card">
+                            <h4 class="card-title">🤖 AMD Detection</h4>
+                            <p class="card-description">Answering machine detection to optimize campaign effectiveness.</p>
+                        </div>
+                        
+                        <div class="card">
+                            <h4 class="card-title">📝 Call Recording</h4>
+                            <p class="card-description">Record and playback calls for quality assurance and compliance.</p>
+                        </div>
+                        
+                        <div class="card">
+                            <h4 class="card-title">👥 Contact Management</h4>
+                            <p class="card-description">Organize contacts with lists, tags, and custom variables.</p>
+                        </div>
+                        
+                        <div class="card">
+                            <h4 class="card-title">🔒 Role-Based Access</h4>
+                            <p class="card-description">Admin, Customer, and Agent roles with granular permissions.</p>
+                        </div>
+                        
+                        <div class="card">
+                            <h4 class="card-title">💳 Stripe Integration</h4>
+                            <p class="card-description">Secure payment processing for credit top-ups with PCI DSS compliance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Installation Section (Initially Hidden) -->
+            <div id="installation-section" class="content-page hidden">
+                <div class="content-section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="bi bi-download"></i>
+                        </div>
+                        <div>
+                            <h2 class="section-title">Installation Guide</h2>
+                            <p class="section-description">Complete setup instructions for Teleman AI</p>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle alert-icon"></i>
+                        <div class="alert-content">
+                            <div class="alert-title">Before You Begin</div>
+                            <p>Make sure you have all system requirements ready: PHP 8.2+, MySQL 8.0+, Node.js 18+, and Composer installed.</p>
+                        </div>
+                    </div>
+                    
+                    <h3 class="mb-3 mt-4">System Requirements</h3>
+                    
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Component</th>
+                                    <th>Minimum</th>
+                                    <th>Recommended</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>PHP</strong></td>
+                                    <td>8.2.0</td>
+                                    <td>8.3+</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>MySQL</strong></td>
+                                    <td>8.0</td>
+                                    <td>8.0+</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Node.js</strong></td>
+                                    <td>18.x</td>
+                                    <td>20.x LTS</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>RAM</strong></td>
+                                    <td>2 GB</td>
+                                    <td>4 GB+</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Storage</strong></td>
+                                    <td>5 GB</td>
+                                    <td>10 GB+</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3 class="mb-3 mt-4">Installation Steps</h3>
+                    
+                    <div class="steps">
+                        <div class="step">
+                            <h4 class="step-title">Clone the Repository</h4>
+                            <div class="step-description">
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span class="code-language">bash</span>
+                                        <button class="copy-btn" onclick="copyCode(this)">
+                                            <i class="bi bi-clipboard"></i> Copy
+                                        </button>
+                                    </div>
+                                    <pre><code>git clone https://github.com/TheCodeStudioxyz/teleman-new-vue.git
+cd teleman-new-vue</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <h4 class="step-title">Install Dependencies</h4>
+                            <div class="step-description">
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span class="code-language">bash</span>
+                                        <button class="copy-btn" onclick="copyCode(this)">
+                                            <i class="bi bi-clipboard"></i> Copy
+                                        </button>
+                                    </div>
+                                    <pre><code>composer install
+npm install</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                        <h4 class="step-title">Step-by-step for cPanel (no technical knowledge needed)</h4>
+                        <div class="step-description">
+                            <ol>
+                                <li><strong>Upload:</strong> cPanel → <em>File Manager</em> → open <code>public_html</code> → <em>Upload</em> the zip → right-click it → <em>Extract</em>. You should now see folders such as <code>app</code>, <code>public</code>, <code>vendor</code> directly inside <code>public_html</code>. Delete the zip.</li>
+                                <li><strong>PHP version:</strong> cPanel → <em>MultiPHP Manager</em> → set the domain to PHP 8.2 or newer.</li>
+                                <li><strong>Database:</strong> cPanel → <em>MySQL Database Wizard</em> → create a database, then a user with a password, and give the user <em>All Privileges</em>. Keep the three values (database name, user name, password) — the wizard asks for them.</li>
+                                <li><strong>Open your domain</strong> in the browser. The setup wizard appears. Step 1 checks the server (each red item tells you what to change and where); step 2 asks for the database values from above — host is <code>localhost</code>; step 3 creates your admin account.</li>
+                                <li><strong>Background jobs:</strong> the final screen shows two commands. cPanel → <em>Cron Jobs</em> → add each one with the schedule "every minute" (<code>* * * * *</code>). Without them, campaigns will not dial.</li>
+                                <li><strong>Log in</strong> at <code>yourdomain.com/login</code> and configure Twilio under System Configuration.</li>
+                            </ol>
+                            <p>Something looks wrong? Reload the domain — the wizard resumes exactly where it stopped. If it still fails, send support the output of <code>php artisan install:selfcheck</code> (cPanel → Terminal) or a screenshot of the red items on step 1.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <h4 class="step-title">Web Installer — recommended (no shell access needed)</h4>
+                        <div class="step-description">
+                            <p>Upload the package to your server, point the domain at the <code>public/</code> folder (if your host cannot change the document root, upload into <code>public_html</code> as-is — the included root <code>.htaccess</code> routes into <code>public/</code>), then open the domain in a browser.</p>
+                            <p>The installer creates <code>.env</code>, generates the application key and starts a three-step wizard: <strong>requirements → database → admin account</strong>. The database is built in short, resumable slices, so slow hosts and PHP time limits cannot break it — if a step is interrupted, click again and it continues where it stopped.</p>
+                            <p>The final screen shows the two background commands the platform needs (a cron entry for the scheduler and a queue worker). Set both up — campaigns, imports and emails do not run without them. To verify a server before installing, run <code>php artisan install:selfcheck</code>.</p>
+                            <p>The steps below are the <em>manual</em> alternative for developers with shell access.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                            <h4 class="step-title">Configure Environment</h4>
+                            <div class="step-description">
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span class="code-language">bash</span>
+                                        <button class="copy-btn" onclick="copyCode(this)">
+                                            <i class="bi bi-clipboard"></i> Copy
+                                        </button>
+                                    </div>
+                                    <pre><code>cp .env.example .env
+php artisan key:generate</code></pre>
+                                </div>
+                                <p class="mt-2">Edit <code>.env</code> file with your database credentials and app configuration.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <h4 class="step-title">Run Migrations & Seed</h4>
+                            <div class="step-description">
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span class="code-language">bash</span>
+                                        <button class="copy-btn" onclick="copyCode(this)">
+                                            <i class="bi bi-clipboard"></i> Copy
+                                        </button>
+                                    </div>
+                                    <pre><code>php artisan migrate:fresh --seed</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <h4 class="step-title">Build Frontend Assets</h4>
+                            <div class="step-description">
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span class="code-language">bash</span>
+                                        <button class="copy-btn" onclick="copyCode(this)">
+                                            <i class="bi bi-clipboard"></i> Copy
+                                        </button>
+                                    </div>
+                                    <pre><code>npm run build</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <h4 class="step-title">Start the Application</h4>
+                            <div class="step-description">
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span class="code-language">bash</span>
+                                        <button class="copy-btn" onclick="copyCode(this)">
+                                            <i class="bi bi-clipboard"></i> Copy
+                                        </button>
+                                    </div>
+                                    <pre><code>php artisan serve</code></pre>
+                                </div>
+                                <p class="mt-2">Visit <code>http://localhost:8000</code> in your browser.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-success mt-4">
+                        <i class="bi bi-check-circle alert-icon"></i>
+                        <div class="alert-content">
+                            <div class="alert-title">Installation Complete!</div>
+                            <p>Your Teleman AI instance is now running. Default admin credentials are <code>admin@example.com</code> / <code>password</code></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Placeholder sections for other pages -->
+            <div id="quick-start-section" class="content-page hidden">
+                <div class="content-section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="bi bi-rocket-takeoff"></i>
+                        </div>
+                        <div>
+                            <h2 class="section-title">Quick Start Guide</h2>
+                            <p class="section-description">Get your first campaign running in 20 minutes</p>
+                        </div>
+                    </div>
+                    
+                    <p>Follow this tutorial to create and launch your first calling campaign...</p>
+                    
+                    <div class="alert alert-info mt-3">
+                        <i class="bi bi-lightbulb alert-icon"></i>
+                        <div class="alert-content">
+                            <p>Complete documentation for Quick Start available in the markdown files. This HTML version provides the essential overview.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CRM Integrations Section -->
+            <div id="crm-integrations-section" class="content-page hidden">
+                <div class="content-section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="bi bi-plug"></i>
+                        </div>
+                        <div>
+                            <h2 class="section-title">CRM Integrations</h2>
+                            <p class="section-description">Connect your CRM and marketing automation tools with real-time webhooks</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-lg">Teleman AI integrates seamlessly with your existing CRM, marketing automation platforms, and custom systems through powerful webhook-based integrations. Automatically sync call data, leads, contacts, and campaign events in real-time.</p>
+                    
+                    <!-- Overview -->
+                    <div class="mt-6">
+                        <h3 class="text-xl font-semibold mb-3">What are CRM Integrations?</h3>
+                        <p>CRM Integrations allow you to push data from Teleman AI to external systems automatically. When specific events occur (like a call completion, a hot lead detected, or a contact update), Teleman sends an HTTP webhook to your configured endpoint with the relevant data.</p>
+                        
+                        <div class="alert alert-success mt-4">
+                            <i class="bi bi-check-circle alert-icon"></i>
+                            <div class="alert-content">
+                                <div class="alert-title">Production Ready</div>
+                                <p>Built with reliability in mind: automatic retries, delivery logs, webhook testing, and multiple authentication methods.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Supported Events -->
+                    <div class="mt-6">
+                        <h3 class="text-xl font-semibold mb-3">Supported Events</h3>
+                        <p>Choose which events trigger webhooks to your system:</p>
+                        
+                        <div class="cards-grid mt-4">
+                            <div class="card">
+                                <div class="card-icon">📞</div>
+                                <h4 class="font-semibold">Call Completed</h4>
+                                <p class="text-sm text-secondary mt-2">Triggered when a call ends. Includes full call data with transcript, duration, sentiment score, and AI-detected intent.</p>
+                            </div>
+                            
+                            <div class="card">
+                                <div class="card-icon">🔥</div>
+                                <h4 class="font-semibold">Lead Qualified</h4>
+                                <p class="text-sm text-secondary mt-2">Triggered when AI detects a hot lead based on sentiment analysis and conversation quality (high score/positive sentiment).</p>
+                            </div>
+                            
+                            <div class="card">
+                                <div class="card-icon">👤</div>
+                                <h4 class="font-semibold">Contact Added</h4>
+                                <p class="text-sm text-secondary mt-2">Triggered when a new contact is created manually or imported. Perfect for syncing your contact database.</p>
+                            </div>
+                            
+                            <div class="card">
+                                <div class="card-icon">✏️</div>
+                                <h4 class="font-semibold">Contact Updated</h4>
+                                <p class="text-sm text-secondary mt-2">Triggered when contact information is modified. Keep your CRM data synchronized in real-time.</p>
+                            </div>
+                            
+                            <div class="card">
+                                <div class="card-icon">🚀</div>
+                                <h4 class="font-semibold">Campaign Started</h4>
+                                <p class="text-sm text-secondary mt-2">Triggered when a campaign is launched. Track campaign lifecycle and send notifications.</p>
+                            </div>
+                            
+                            <div class="card">
+                                <div class="card-icon">🔢</div>
+                                <h4 class="font-semibold">DTMF Response</h4>
+                                <p class="text-sm text-secondary mt-2">Triggered when a contact presses a phone key during a call. Capture survey responses and menu selections.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Authentication Methods -->
+                    <div class="mt-6">
+                        <h3 class="text-xl font-semibold mb-3">Authentication Methods</h3>
+                        <p>Secure your webhooks with multiple authentication options:</p>
+                        
+                        <div class="mt-4 space-y-4">
+                            <div class="card">
+                                <h4 class="font-semibold mb-2">🔓 None (Testing Only)</h4>
+                                <p class="text-sm">No authentication required. Use only for development and testing. Not recommended for production.</p>
+                            </div>
+                            
+                            <div class="card">
+                                <h4 class="font-semibold mb-2">🎟️ Bearer Token</h4>
+                                <p class="text-sm">Standard OAuth 2.0 bearer token authentication. Most CRMs and APIs use this method. Token is sent in the <code>Authorization: Bearer {token}</code> header.</p>
+                            </div>
+                            
+                            <div class="card">
+                                <h4 class="font-semibold mb-2">🔑 API Key</h4>
+                                <p class="text-sm">Custom header-based authentication. Specify your own header name (e.g., <code>X-API-Key</code>) and secret value. Flexible for custom integrations.</p>
+                            </div>
+                            
+                            <div class="card">
+                                <h4 class="font-semibold mb-2">🔐 HMAC Signature</h4>
+                                <p class="text-sm">Maximum security using cryptographic signatures. Teleman signs each request with your secret key using SHA-256. Your endpoint verifies the signature to ensure authenticity.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Getting Started -->
+                    <div class="mt-6">
+                        <h3 class="text-xl font-semibold mb-3">Getting Started</h3>
+                        
+                        <div class="alert alert-info mb-4">
+                            <i class="bi bi-lightbulb alert-icon"></i>
+                            <div class="alert-content">
+                                <div class="alert-title">Quick Setup</div>
+                                <p>Navigate to <strong>Integrations → CRM Integrations</strong> in the sidebar to create your first integration.</p>
+                            </div>
+                        </div>
+                        
+                        <h4 class="font-semibold mt-4 mb-2">Step 1: Create Integration</h4>
+                        <ol class="list-decimal ml-6 space-y-2">
+                            <li>Go to <strong>CRM Integrations</strong> page</li>
+                            <li>Click <strong>"Add Integration"</strong> button</li>
+                            <li>Enter a descriptive name (e.g., "Salesforce Production")</li>
+                            <li>Provide your webhook endpoint URL</li>
+                            <li>Select which events should trigger webhooks</li>
+                            <li>Choose authentication method and configure credentials</li>
+                            <li>Enable the integration</li>
+                        </ol>
+                        
+                        <h4 class="font-semibold mt-4 mb-2">Step 2: Test Your Integration</h4>
+                        <p>Before going live, test your webhook endpoint:</p>
+                        <ol class="list-decimal ml-6 space-y-2 mt-2">
+                            <li>Click the <strong>"Test"</strong> button on your integration card</li>
+                            <li>Teleman sends a sample webhook to your endpoint</li>
+                            <li>Check the response status and verify your endpoint received the data</li>
+                            <li>Review the <strong>Webhook Logs</strong> to see delivery details</li>
+                        </ol>
+                        
+                        <h4 class="font-semibold mt-4 mb-2">Step 3: Monitor Delivery</h4>
+                        <p>View all webhook deliveries in real-time:</p>
+                        <ul class="list-disc ml-6 space-y-2 mt-2">
+                            <li>Click <strong>"View Logs"</strong> on any integration</li>
+                            <li>See timestamps, status codes, and response data</li>
+                            <li>Green badges indicate successful deliveries (2xx status)</li>
+                            <li>Red badges show failures with error details</li>
+                            <li>Click <strong>"Retry"</strong> to resend failed webhooks</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Webhook Payload Example -->
+                    <div class="mt-6">
+                        <h3 class="text-xl font-semibold mb-3">Webhook Payload Example</h3>
+                        <p>Example payload for a <code>call_completed</code> event:</p>
+                        
+                        <div class="code-block mt-3">
+                            <div class="code-header">
+                                <span>POST /your-webhook-endpoint</span>
+                                <button onclick="copyCode(this)" class="code-copy">
+                                    <i class="bi bi-clipboard"></i> Copy
+                                </button>
+                            </div>
+                            <pre><code>{
+  "event": "call_completed",
+  "data": {
+    "call_id": 1234,
+    "contact_id": 5678,
+    "campaign_id": 91,
+    "phone_number": "+1234567890",
+    "duration": 45,
+    "status": "completed",
+    "transcript": "Hello, this is John...",
+    "sentiment": "positive",
+    "sentiment_score": 0.85,
+    "ai_detected_intent": "interested",
+    "created_at": "2025-12-22T10:30:00Z"
+  },
+  "timestamp": "2025-12-22T10:30:15Z",
+  "integration_id": 42
+}</code></pre>
+                        </div>
+                        
+                        <div class="alert alert-info mt-3">
+                            <i class="bi bi-info-circle alert-icon"></i>
+                            <div class="alert-content">
+                                <p>Payloads vary by event type. Each event includes relevant data fields and metadata.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Best Practices -->
+                    <div class="mt-6">
+                        <h3 class="text-xl font-semibold mb-3">Best Practices</h3>
+                        
+                        <div class="cards-grid mt-4">
+                            <div class="card">
+                                <h4 class="font-semibold mb-2">✅ Respond Quickly</h4>
+                                <p class="text-sm">Return a 2xx status code within 5 seconds. Process heavy tasks asynchronously in a background queue.</p>
+                            </div>
+                            
+                            <div class="card">
+                                <h4 class="font-semibold mb-2">🔄 Handle Retries</h4>
+                                <p class="text-sm">Make your endpoint idempotent. Teleman retries failed webhooks up to 3 times with exponential backoff.</p>
+                            </div>
+                            
+                            <div class="card">
+                                <h4 class="font-semibold mb-2">🔐 Verify Signatures</h4>
+                                <p class="text-sm">Always verify HMAC signatures in production. Reject requests with invalid signatures to prevent spoofing.</p>
+                            </div>
+                            
+                            <div class="card">
+                                <h4 class="font-semibold mb-2">📝 Log Everything</h4>
+                                <p class="text-sm">Log incoming webhooks on your side. This helps debug issues and provides an audit trail.</p>
+                            </div>
+                            
+                            <div class="card">
+                                <h4 class="font-semibold mb-2">🧪 Test Regularly</h4>
+                                <p class="text-sm">Use the built-in test feature regularly to ensure your integration remains functional after changes.</p>
+                            </div>
+                            
+                            <div class="card">
+                                <h4 class="font-semibold mb-2">📊 Monitor Logs</h4>
+                                <p class="text-sm">Check webhook logs periodically for failures. High failure rates may indicate endpoint issues.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Troubleshooting -->
+                    <div class="mt-6">
+                        <h3 class="text-xl font-semibold mb-3">Troubleshooting</h3>
+                        
+                        <h4 class="font-semibold mt-4">Webhook not arriving?</h4>
+                        <ul class="list-disc ml-6 space-y-1 mt-2">
+                            <li>Check if the integration is enabled (Active status)</li>
+                            <li>Verify the event is selected in your integration settings</li>
+                            <li>Ensure your endpoint URL is correct and accessible</li>
+                            <li>Check webhook logs for delivery attempts and errors</li>
+                        </ul>
+                        
+                        <h4 class="font-semibold mt-4">Getting 4xx errors?</h4>
+                        <ul class="list-disc ml-6 space-y-1 mt-2">
+                            <li>400 Bad Request: Your endpoint rejected the payload format</li>
+                            <li>401 Unauthorized: Authentication credentials are incorrect</li>
+                            <li>404 Not Found: Endpoint URL is incorrect or route doesn't exist</li>
+                            <li>429 Too Many Requests: Your endpoint is rate-limiting Teleman</li>
+                        </ul>
+                        
+                        <h4 class="font-semibold mt-4">Getting 5xx errors?</h4>
+                        <ul class="list-disc ml-6 space-y-1 mt-2">
+                            <li>500 Internal Server Error: Your endpoint code has a bug</li>
+                            <li>502 Bad Gateway: Reverse proxy or load balancer issue</li>
+                            <li>503 Service Unavailable: Your endpoint is down or overloaded</li>
+                            <li>504 Gateway Timeout: Your endpoint took too long to respond (&gt;30s)</li>
+                        </ul>
+                        
+                        <div class="alert alert-warning mt-4">
+                            <i class="bi bi-exclamation-triangle alert-icon"></i>
+                            <div class="alert-content">
+                                <div class="alert-title">Retry Behavior</div>
+                                <p>Failed webhooks are retried 3 times with delays: 1 minute, 5 minutes, then 15 minutes. After 3 failures, the webhook is marked as permanently failed and requires manual retry.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Advanced Features -->
+                    <div class="mt-6">
+                        <h3 class="text-xl font-semibold mb-3">Advanced Features</h3>
+                        
+                        <h4 class="font-semibold mt-4">Custom Headers</h4>
+                        <p>Add custom HTTP headers to your webhook requests (useful for API keys, routing info, etc.):</p>
+                        <div class="code-block mt-2">
+                            <pre><code>X-Tenant-ID: abc123
+X-Environment: production
+X-Source: teleman-ai</code></pre>
+                        </div>
+                        
+                        <h4 class="font-semibold mt-4">Event Filtering</h4>
+                        <p>Create multiple integrations for different event types. For example:</p>
+                        <ul class="list-disc ml-6 mt-2">
+                            <li><strong>CRM Integration:</strong> Only <code>lead_qualified</code> and <code>contact_added</code></li>
+                            <li><strong>Analytics Integration:</strong> Only <code>call_completed</code> events</li>
+                            <li><strong>Notification Service:</strong> Only <code>campaign_started</code> events</li>
+                        </ul>
+                        
+                        <h4 class="font-semibold mt-4">Manual Retry</h4>
+                        <p>Failed webhooks can be manually retried from the Webhook Logs page. This is useful when:</p>
+                        <ul class="list-disc ml-6 mt-2">
+                            <li>Your endpoint was temporarily down</li>
+                            <li>You fixed a bug in your webhook handler</li>
+                            <li>Authentication credentials were incorrect</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Related Documentation -->
+                    <div class="mt-6">
+                        <h3 class="text-xl font-semibold mb-3">Related Documentation</h3>
+                        <div class="alert alert-info">
+                            <i class="bi bi-book alert-icon"></i>
+                            <div class="alert-content">
+                                <p>For detailed API documentation, code examples, and advanced configuration, see:</p>
+                                <ul class="list-disc ml-6 mt-2">
+                                    <li><code>docs/CRM_INTEGRATION_README.md</code> - Complete feature overview</li>
+                                    <li><code>docs/CRM_INTEGRATION_QUICKSTART.md</code> - Step-by-step setup guide</li>
+                                    <li><code>docs/CRM_INTEGRATION_TESTING.md</code> - Testing and quality assurance</li>
+                                    <li><code>docs/CRM_INTEGRATION_COMPLETE.md</code> - Technical implementation details</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Manual Calling Section -->
+            <div id="manual-calling-section" class="content-page hidden">
+                <div class="content-section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="bi bi-telephone-outbound"></i>
+                        </div>
+                        <div>
+                            <h2 class="section-title">Manual Calling Workflow</h2>
+                            <p class="section-description">Click-to-call, post-call disposition, sequential calling sessions, and contact-level call tracking for human callers</p>
+                        </div>
+                    </div>
+
+                    <p class="text-lg">The Manual Calling system enables human agents and callers to work through contact lists efficiently. Click to call any contact, record notes and dispositions after each call, and use the sequential calling session to work through lists automatically.</p>
+
+                    <div class="alert alert-success mt-4">
+                        <i class="bi bi-check-circle alert-icon"></i>
+                        <div class="alert-content">
+                            <div class="alert-title">Production Ready</div>
+                            <p>All features are fully integrated with the global softphone widget, authorization system, and i18n translations (10 languages supported).</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature Overview -->
+                    <div class="mt-6">
+                        <h3 class="text-xl font-semibold mb-3">Feature Overview</h3>
+
+                        <div class="cards-grid mt-4">
+                            <div class="card">
+                                <div class="card-icon">📞</div>
+                                <h4 class="font-semibold">Click-to-Call</h4>
+                                <p class="text-sm text-secondary mt-2">Call any contact directly from the contacts list or detail page. The softphone widget auto-populates and the call is linked to the contact record.</p>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-icon">📝</div>
+                                <h4 class="font-semibold">Post-Call Disposition</h4>
+                                <p class="text-sm text-secondary mt-2">After each call ends, a modal prompts the agent to select a disposition code, add notes, and optionally schedule a callback.</p>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-icon">📋</div>
+                                <h4 class="font-semibold">Calling Session</h4>
+                                <p class="text-sm text-secondary mt-2">Sequential calling interface for working through a contact list. Auto-advances to the next contact after each disposition is saved.</p>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-icon">📊</div>
+                                <h4 class="font-semibold">Call Tracking</h4>
+                                <p class="text-sm text-secondary mt-2">Contact-level call history with dispositions, notes, and timestamps. See total calls, last contacted date, and call history on each contact.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Click-to-Call -->
+                    <div class="mt-6">
+                        <h3 class="text-xl font-semibold mb-3">Click-to-Call</h3>
+                        <p>Call contacts directly from anywhere in the application. The softphone widget handles the call while the contact record is automatically linked.</p>
+
+                        <h4 class="font-semibold mt-4 mb-2">From Contacts List</h4>
+                        <ol class="list-decimal ml-6 space-y-2">
+                            <li>Navigate to <strong>Contacts</strong> from the sidebar</li>
+                            <li>Find the contact you want to call</li>
+                            <li>Click the <strong>phone icon button</strong> in the contact's row</li>
+                            <li>The softphone widget expands with the number pre-filled</li>
+                            <li>Click <strong>"Call"</strong> in the softphone widget to initiate the call</li>
+                        </ol>
+
+                        <h4 class="font-semibold mt-4 mb-2">From Contact Detail Page</h4>
+                        <ol class="list-decimal ml-6 space-y-2">
+                            <li>Open any contact's detail page</li>
+                            <li>Click the <strong>"Call This Contact"</strong> button in the header</li>
+                            <li>The softphone widget opens with the number ready</li>
+                            <li>Click <strong>"Call"</strong> to start the call</li>
+                        </ol>
+
+                        <div class="alert alert-info mt-4">
+                            <i class="bi bi-info-circle alert-icon"></i>
+                            <div class="alert-content">
+                                <div class="alert-title">Automatic Linking</div>
+                                <p>When you call a contact via click-to-call, the resulting call record is automatically linked to the contact. This enables disposition tracking and call history on the contact's profile.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Post-Call Disposition -->
+                    <div class="mt-6">
+                        <h3 class="text-xl font-semibold mb-3">Post-Call Disposition</h3>
+                        <p>When a contact-linked call ends, a disposition modal automatically appears after a brief delay, prompting the agent to log the call outcome.</p>
+
+                        <h4 class="font-semibold mt-4 mb-2">Disposition Codes</h4>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Disposition</th>
+                                        <th>Description</th>
+                                        <th>Color</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Interested</strong></td>
+                                        <td>Contact expressed interest in the product/service</td>
+                                        <td><span style="color: #16a34a;">Green</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Not Interested</strong></td>
+                                        <td>Contact declined or is not interested</td>
+                                        <td><span style="color: #dc2626;">Red</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Callback</strong></td>
+                                        <td>Contact requested a callback at a specific time</td>
+                                        <td><span style="color: #2563eb;">Blue</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Wrong Number</strong></td>
+                                        <td>Phone number is incorrect or belongs to someone else</td>
+                                        <td><span style="color: #ea580c;">Orange</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Voicemail</strong></td>
+                                        <td>Call went to voicemail</td>
+                                        <td><span style="color: #9333ea;">Purple</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>No Answer</strong></td>
+                                        <td>Contact did not answer the call</td>
+                                        <td><span style="color: #6b7280;">Gray</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Do Not Call</strong></td>
+                                        <td>Contact requested to not be contacted again</td>
+                                        <td><span style="color: #991b1b;">Dark Red</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4 class="font-semibold mt-4 mb-2">Disposition Modal Fields</h4>
+                        <ul class="list-disc ml-6 space-y-2">
+                            <li><strong>Disposition Code</strong> (required) - Select one of the 7 disposition codes above</li>
+                            <li><strong>Call Notes</strong> (optional) - Free-text notes about the conversation</li>
+                            <li><strong>Callback Date/Time</strong> (conditional) - Appears only when "Callback" disposition is selected</li>
+                        </ul>
+
+                        <div class="alert alert-warning mt-4">
+                            <i class="bi bi-exclamation-triangle alert-icon"></i>
+                            <div class="alert-content">
+                                <div class="alert-title">Skip Option</div>
+                                <p>Agents can skip the disposition modal if they prefer not to log the call outcome. However, skipping means no disposition data is recorded for that call.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sequential Calling Session -->
+                    <div class="mt-6">
+                        <h3 class="text-xl font-semibold mb-3">Sequential Calling Session</h3>
+                        <p>The calling session provides a dedicated interface for working through a contact list sequentially, maximizing agent productivity.</p>
+
+                        <h4 class="font-semibold mt-4 mb-2">Starting a Calling Session</h4>
+                        <ol class="list-decimal ml-6 space-y-2">
+                            <li>Navigate to <strong>Contacts</strong></li>
+                            <li>Optionally select a <strong>contact list</strong> from the filter dropdown</li>
+                            <li>Click the <strong>"Start Calling"</strong> button</li>
+                            <li>You'll be taken to the dedicated calling session page</li>
+                        </ol>
+
+                        <h4 class="font-semibold mt-4 mb-2">Calling Session Interface</h4>
+                        <ul class="list-disc ml-6 space-y-2">
+                            <li><strong>Progress Bar</strong> - Visual indicator showing how far through the list you are</li>
+                            <li><strong>Current Contact Card</strong> - Shows the contact's name, phone number, email, company, total calls, last contacted date, and notes</li>
+                            <li><strong>Last Call Result</strong> - Displays the previous disposition for the current contact (if any)</li>
+                            <li><strong>Call Now Button</strong> - Green button to initiate the call via the softphone</li>
+                            <li><strong>Skip Contact</strong> - Move to the next contact without calling</li>
+                            <li><strong>Previous / Next</strong> - Navigate manually through the list</li>
+                            <li><strong>Contact Queue</strong> - Scrollable sidebar showing all contacts with their disposition badges</li>
+                            <li><strong>List Switcher</strong> - Dropdown to switch between contact lists without leaving the session</li>
+                        </ul>
+
+                        <h4 class="font-semibold mt-4 mb-2">Auto-Advance Behavior</h4>
+                        <p>After saving a disposition in the post-call modal, the calling session automatically advances to the next contact in the list. This creates a seamless workflow:</p>
+                        <ol class="list-decimal ml-6 space-y-2 mt-2">
+                            <li>Click <strong>"Call Now"</strong> to call the current contact</li>
+                            <li>Have your conversation</li>
+                            <li>Call ends - disposition modal appears</li>
+                            <li>Select disposition, add notes, save</li>
+                            <li>Session auto-advances to the next contact</li>
+                            <li>Repeat from step 1</li>
+                        </ol>
+
+                        <div class="alert alert-info mt-4">
+                            <i class="bi bi-lightbulb alert-icon"></i>
+                            <div class="alert-content">
+                                <div class="alert-title">List Ordering</div>
+                                <p>Contacts in the calling session are ordered by <strong>last contacted date (oldest first)</strong>, so contacts who haven't been called recently appear first. Opted-out contacts are automatically excluded.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact-Level Call Tracking -->
+                    <div class="mt-6">
+                        <h3 class="text-xl font-semibold mb-3">Contact-Level Call Tracking</h3>
+                        <p>All manual calls made through click-to-call are tracked at the contact level, providing a complete call history.</p>
+
+                        <h4 class="font-semibold mt-4 mb-2">Contact Detail Page - Call History</h4>
+                        <p>The contact detail page (<strong>Contacts &gt; View Contact</strong>) shows:</p>
+                        <ul class="list-disc ml-6 space-y-2">
+                            <li><strong>Total Calls</strong> - Cumulative count of all calls made to the contact</li>
+                            <li><strong>Last Contacted</strong> - Timestamp of the most recent call</li>
+                            <li><strong>Recent Calls Table</strong> - List of recent calls with:
+                                <ul class="list-disc ml-6 mt-1">
+                                    <li>Date and time</li>
+                                    <li>Disposition badge (color-coded)</li>
+                                    <li>Call notes</li>
+                                    <li>Duration</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h4 class="font-semibold mt-4 mb-2">Contacts List View</h4>
+                        <p>The contacts index page shows quick indicators:</p>
+                        <ul class="list-disc ml-6 space-y-2">
+                            <li><strong>Phone icon button</strong> - Quick click-to-call action on each row</li>
+                            <li><strong>Total calls count</strong> visible in the table</li>
+                            <li><strong>Last contacted date</strong> for at-a-glance status</li>
+                        </ul>
+                    </div>
+
+                    <!-- Authorization & Roles -->
+                    <div class="mt-6">
+                        <h3 class="text-xl font-semibold mb-3">Authorization & Roles</h3>
+                        <p>Manual calling features respect the existing role-based access control system:</p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Role</th>
+                                        <th>Click-to-Call</th>
+                                        <th>Disposition</th>
+                                        <th>Calling Session</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Admin</strong></td>
+                                        <td>All contacts</td>
+                                        <td>All calls</td>
+                                        <td>All lists</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Customer</strong></td>
+                                        <td>Own contacts</td>
+                                        <td>Own calls</td>
+                                        <td>Own lists</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Agent</strong></td>
+                                        <td>Parent's contacts</td>
+                                        <td>Own + parent's calls</td>
+                                        <td>Parent's lists</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="alert alert-info mt-4">
+                            <i class="bi bi-shield-check alert-icon"></i>
+                            <div class="alert-content">
+                                <div class="alert-title">Agent Role</div>
+                                <p>Agents can only access their parent customer's contacts and make calls using assigned phone numbers. They cannot access admin features or other customers' data. The <code>calls.make</code> permission is required.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Database Schema -->
+                    <div class="mt-6">
+                        <h3 class="text-xl font-semibold mb-3">Database Schema</h3>
+                        <p>Manual calling adds the following fields to the <code>calls</code> table:</p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Column</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>contact_id</code></td>
+                                        <td>FK (nullable)</td>
+                                        <td>Links the call to a contact. SET NULL on delete.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>disposition</code></td>
+                                        <td>VARCHAR(50)</td>
+                                        <td>One of 7 disposition codes (interested, not_interested, etc.)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>call_notes</code></td>
+                                        <td>TEXT</td>
+                                        <td>Free-text notes from the agent about the call</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>callback_at</code></td>
+                                        <td>TIMESTAMP</td>
+                                        <td>Scheduled callback date/time (for "callback" disposition)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Migration</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="bi bi-clipboard"></i> Copy
+                                </button>
+                            </div>
+                            <pre><code>php artisan migrate
+# Runs: 2026_03_16_100000_add_disposition_and_contact_to_calls_table</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- API Reference -->
+                    <div class="mt-6">
+                        <h3 class="text-xl font-semibold mb-3">API Reference</h3>
+
+                        <h4 class="font-semibold mt-4 mb-2">Save Disposition</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>POST /calls/{call}/disposition</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="bi bi-clipboard"></i> Copy
+                                </button>
+                            </div>
+                            <pre><code>{
+  "disposition": "interested",   // required: one of 7 codes
+  "call_notes": "Very interested in premium plan",  // optional
+  "callback_at": "2026-03-20T14:00:00"  // optional, for callbacks
+}</code></pre>
+                        </div>
+
+                        <h4 class="font-semibold mt-4 mb-2">Initiate Call (with contact linking)</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>POST /calls/initiate</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="bi bi-clipboard"></i> Copy
+                                </button>
+                            </div>
+                            <pre><code>{
+  "to_number": "+1234567890",
+  "from_number": "+0987654321",
+  "contact_id": 42,              // optional: links call to contact
+  "enable_recording": true
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Related Documentation -->
+                    <div class="mt-6">
+                        <h3 class="text-xl font-semibold mb-3">Related Documentation</h3>
+                        <div class="alert alert-info">
+                            <i class="bi bi-book alert-icon"></i>
+                            <div class="alert-content">
+                                <p>For detailed technical documentation, see:</p>
+                                <ul class="list-disc ml-6 mt-2">
+                                    <li><code>docs/MANUAL_CALLING_WORKFLOW.md</code> - Complete technical implementation guide</li>
+                                    <li><code>docs/GLOBAL_SOFTPHONE_WIDGET_COMPLETE.md</code> - Softphone widget architecture</li>
+                                    <li><code>docs/AGENT_ROLE_ANALYSIS.md</code> - Agent role and permissions details</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- More sections will be added via JavaScript -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://github.com/TheCodeStudioxyz/teleman-new-vue" class="footer-link" target="_blank">GitHub</a>
+            <a href="#" class="footer-link">Support</a>
+            <a href="#" class="footer-link">Terms</a>
+            <a href="#" class="footer-link">Privacy</a>
+        </div>
+        <p>&copy; 2025 Teleman AI. All rights reserved. Built with ❤️ for better communication.</p>
+    </footer>
+    
+    <script>
+        // Sidebar Toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+        
+        // Show Section
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-page').forEach(page => {
+                page.classList.add('hidden');
+            });
+            
+            // Show selected section
+            const section = document.getElementById(sectionId + '-section');
+            if (section) {
+                section.classList.remove('hidden');
+                section.classList.add('fade-in');
+            }
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.closest('.nav-link').classList.add('active');
+            
+            // Close sidebar on mobile
+            if (window.innerWidth <= 1024) {
+                document.getElementById('sidebar').classList.remove('open');
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Copy Code
+        function copyCode(button) {
+            const codeBlock = button.closest('.code-block');
+            const code = codeBlock.querySelector('code').textContent;
+            
+            navigator.clipboard.writeText(code).then(() => {
+                const originalHTML = button.innerHTML;
+                button.innerHTML = '<i class="bi bi-check"></i> Copied!';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalHTML;
+                }, 2000);
+            });
+        }
+        
+        // FAQ Toggle
+        function toggleFAQ(element) {
+            const faqItem = element.closest('.faq-item');
+            const isActive = faqItem.classList.contains('active');
+            
+            // Close all FAQs
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Open clicked FAQ if it wasn't active
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        }
+        
+        // Search Functionality
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            if (searchTerm.length < 2) return;
+            
+            // Simple search through nav items
+            document.querySelectorAll('.nav-link').forEach(link => {
+                const text = link.textContent.toLowerCase();
+                const parent = link.closest('.nav-item');
+                
+                if (text.includes(searchTerm)) {
+                    parent.style.display = 'block';
+                } else {
+                    parent.style.display = 'none';
+                }
+            });
+        });
+        
+        // Clear search on escape
+        document.getElementById('searchInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                this.value = '';
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.style.display = 'block';
+                });
+            }
+        });
+        
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth <= 1024) {
+                const sidebar = document.getElementById('sidebar');
+                const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+                
+                if (!sidebar.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                }
+            }
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# Shared-hosting fallback.
+#
+# The application is meant to be served from the public/ folder. Many shared
+# hosts cannot change the document root, so buyers upload everything into
+# public_html and open the domain — and get a directory listing instead of
+# the installer. This routes every request into public/, where the real
+# front controller and asset files live.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Never expose the application's own files if rewriting is unavailable.
+<FilesMatch "^(\.env.*|composer\.(json|lock)|package(-lock)?\.json|artisan|phpunit\.xml)$">
+    Require all denied
+</FilesMatch>

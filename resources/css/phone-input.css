@@ -1,0 +1,37 @@
+/* Custom styling for react-phone-number-input to match shadcn/ui theme */
+
+.PhoneInput {
+  display: flex;
+  align-items: stretch;
+}
+
+.PhoneInputInput {
+  flex: 1;
+  min-width: 0;
+}
+
+.PhoneInputCountry {
+  display: flex;
+  align-items: center;
+}
+
+.PhoneInputCountryIcon {
+  width: 1.25rem;
+  height: 1rem;
+  overflow: hidden;
+}
+
+.PhoneInputCountryIcon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.PhoneInputCountrySelect {
+  display: none;
+}
+
+.PhoneInputCountrySelectArrow {
+  display: none;
+}
+

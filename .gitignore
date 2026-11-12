@@ -1,0 +1,64 @@
+# PHP
+/vendor/
+/.env
+/public/build/
+/storage/logs/
+/storage/framework/cache/
+/storage/framework/sessions/
+/storage/framework/views/
+/storage/*.log
+*.log
+composer.lock
+
+# Node.js
+/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/.pnp.js
+.pnp
+
+# Build outputs
+/dist/
+/build/
+/public/build/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Laravel
+/storage/
+/bootstrap/cache/
+/env
+/!composer.lock
+
+# Coverage
+/coverage/
+/clover.xml
+*.coverage
+
+# CI/CD
+.github/workflows/*.yml
+
+# Optional npm cache dir
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Temporary files
+*.tmp
+*.temp
