@@ -76,6 +76,20 @@ php artisan serve
 npm run dev
 ```
 
+## 🌐 Desenvolvimento com lamp.endor.dev
+
+Este projeto está configurado para rodar no ambiente **endor.dev/s/lamp**:
+
+```bash
+# Acesso via endor.dev:
+https://teleman.sebastisnzoth.teleman.lamp.endor.dev
+
+# Ou clonar e executar localmente:
+git clone https://github.com/sebastisnzoth/teleman.git
+cd teleman
+./setup-local.sh  # Script de instalação automática
+```
+
 ## 📁 Estrutura do Projeto
 
 ```
